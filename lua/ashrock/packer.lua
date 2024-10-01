@@ -17,4 +17,8 @@ return require('packer').startup(function(use)
   use({'williamboman/mason-lspconfig.nvim'})
   use({'hrsh7th/nvim-cmp'})
   use({'hrsh7th/cmp-nvim-lsp'})
+  use({
+  "jose-elias-alvarez/null-ls.nvim",
+  requires = { "nvim-lua/plenary.nvim" }
+})
 end)
