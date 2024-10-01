@@ -1,0 +1,2 @@
+require('ashrock')
+print("Hello")
