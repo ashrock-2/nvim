@@ -1,2 +1,1 @@
 require('ashrock')
-print("Hello")

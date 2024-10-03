@@ -9,3 +9,5 @@ end)
 vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Telescope find git files' })
 
 vim.keymap.set({"n", "v"}, "<leader>y", [["+y]])
+
+vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
