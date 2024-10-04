@@ -18,4 +18,3 @@ require("lazy").setup({
   spec = "ashrock.lazy"
 })
 
-vim.cmd("colorscheme yorumi")

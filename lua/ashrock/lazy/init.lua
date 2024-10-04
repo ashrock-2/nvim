@@ -1,7 +1,12 @@
 return {
     "nvim-lua/plenary.nvim",
-    "yorumicolors/yorumi.nvim",
     'tpope/vim-fugitive',
+    {
+        "yorumicolors/yorumi.nvim",
+        config = function()
+            vim.cmd("colorscheme yorumi")
+        end
+    },
     {
         'nvim-telescope/telescope.nvim', tag = '0.1.8',
         dependencies = { 'nvim-lua/plenary.nvim' }
