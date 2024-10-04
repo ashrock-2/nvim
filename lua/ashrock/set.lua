@@ -1,3 +1,5 @@
+vim.g.mapleader = ' '
+
 vim.opt.termguicolors = true
 vim.opt.nu = true
 vim.opt.rnu = true
