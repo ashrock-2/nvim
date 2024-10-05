@@ -1,6 +1,7 @@
 return {
     "nvim-lua/plenary.nvim",
     'tpope/vim-fugitive',
+    'prettier/vim-prettier',
     {
         "yorumicolors/yorumi.nvim",
         config = function()
