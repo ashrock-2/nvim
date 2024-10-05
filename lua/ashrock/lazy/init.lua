@@ -2,6 +2,7 @@ return {
   "nvim-lua/plenary.nvim",
   'tpope/vim-fugitive',
   'prettier/vim-prettier',
+  { 'm4xshen/autoclose.nvim', config = true },
   {
     "yorumicolors/yorumi.nvim",
     config = function()
