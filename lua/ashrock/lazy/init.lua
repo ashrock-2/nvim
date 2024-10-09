@@ -2,6 +2,7 @@ return {
   "nvim-lua/plenary.nvim",
   'tpope/vim-fugitive',
   'prettier/vim-prettier',
+  { 'windwp/nvim-ts-autotag', config = true },
   {
     "yorumicolors/yorumi.nvim",
     config = function()
