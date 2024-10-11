@@ -24,11 +24,11 @@ autocmd('LspAttach', {
         end,
       })
     end
-    vim.api.nvim_create_autocmd("BufWritePre", {
-      pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
-      callback = function()
-        vim.cmd(":PrettierAsync")
-      end,
-    })
+    -- vim.api.nvim_create_autocmd("BufWritePre", {
+    --   pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+    --   callback = function()
+    --     vim.cmd(":Prettier")
+    --   end,
+    -- })
   end
 })
