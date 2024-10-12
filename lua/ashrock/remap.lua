@@ -5,6 +5,8 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "gh", "<cmd>diffget //2<CR>")
 vim.keymap.set("n", "gl", "<cmd>diffget //3<CR>")
 
+vim.keymap.set('n', '<leader>pp', vim.cmd.Prettier)
+
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>ps', function()
