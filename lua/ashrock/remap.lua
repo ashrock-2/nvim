@@ -7,6 +7,11 @@ vim.keymap.set("n", "gl", "<cmd>diffget //3<CR>")
 
 vim.keymap.set('n', '<leader>pp', vim.cmd.Prettier)
 
+-- vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz")
+-- vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz")
+vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz")
+
 local builtin = require('telescope.builtin')
 vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = 'Telescope find files' })
 vim.keymap.set('n', '<leader>ps', function()
