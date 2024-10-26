@@ -8,5 +8,6 @@ return {
         ext = '.md',
       },
     }
+    vim.g.vimwiki_conceallevel = 0
   end,
 }
