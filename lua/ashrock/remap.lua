@@ -21,7 +21,10 @@ vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Telescope find git fil
 
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 
-vim.keymap.set("n", "<leader>gs", vim.cmd.Git)
+vim.keymap.set("n", "<leader>gs", function()
+  vim.cmd.Git()
+  vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>o", true, false, true), "n", true)
+end)
 
 vim.keymap.set("n", "<leader>e", function()
   vim.diagnostic.setqflist()
