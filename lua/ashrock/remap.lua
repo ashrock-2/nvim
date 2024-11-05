@@ -5,7 +5,10 @@ vim.keymap.set("v", "K", ":m '<-2<CR>gv=gv")
 vim.keymap.set("n", "gh", "<cmd>diffget //2<CR>")
 vim.keymap.set("n", "gl", "<cmd>diffget //3<CR>")
 
-vim.keymap.set('n', '<leader>pp', vim.cmd.Prettier)
+vim.keymap.set('n', '<leader>pp', function()
+  vim.cmd.EslintFixAll()
+  vim.cmd.Prettier()
+end)
 
 -- vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz")
