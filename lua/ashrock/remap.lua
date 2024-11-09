@@ -55,6 +55,9 @@ vim.keymap.set("n", "<C-8>", function() harpoon:list():select(8) end)
 vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
 vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
 
+vim.cmd("command W w")
+vim.cmd("command Q q")
+
 
 -- basic telescope configuration
 -- local conf = require("telescope.config").values
