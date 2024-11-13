@@ -50,8 +50,13 @@ local harpoon = require("harpoon")
 harpoon:setup()
 -- REQUIRED
 
+local toggle_opts = {
+  border = "rounded",
+  title_pos = "center",
+  ui_width_ratio = 1,
+}
 vim.keymap.set("n", "<leader>a", function() harpoon:list():add() end)
-vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list()) end)
+vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:list(), toggle_opts) end)
 
 vim.keymap.set("n", "<C-1>", function() harpoon:list():select(1) end)
 vim.keymap.set("n", "<C-2>", function() harpoon:list():select(2) end)
