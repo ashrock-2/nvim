@@ -16,11 +16,22 @@ vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz")
 
 local builtin = require('telescope.builtin')
-vim.keymap.set('n', '<leader>pf', builtin.find_files, { desc = 'Telescope find files' })
+local themes = require('telescope.themes')
+
+vim.keymap.set('n', '<leader>pf', function()
+  builtin.find_files(themes.get_dropdown({ winblend = 10 }))
+end, { desc = 'Telescope find files' })
+
 vim.keymap.set('n', '<leader>ps', function()
-  builtin.grep_string({ search = vim.fn.input("Grep > ") });
+  builtin.grep_string(themes.get_dropdown({
+    search = vim.fn.input("Grep > "),
+    winblend = 10
+  }))
 end)
-vim.keymap.set('n', '<C-p>', builtin.git_files, { desc = 'Telescope find git files' })
+
+vim.keymap.set('n', '<C-p>', function()
+  builtin.git_files(themes.get_dropdown({ winblend = 10 }))
+end, { desc = 'Telescope find git files' })
 
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
 
@@ -57,6 +68,11 @@ vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
 
 vim.cmd("command W w")
 vim.cmd("command Q q")
+
+-- 현재 파일이름을 클립보드에 복사.
+vim.keymap.set('n', '<leader>fn', function()
+  vim.fn.setreg('+', vim.fn.expand('%:t'))
+end, { noremap = true, silent = true })
 
 
 -- basic telescope configuration
