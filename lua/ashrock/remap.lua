@@ -18,19 +18,33 @@ vim.keymap.set("n", "]q", "<cmd>cnext<CR>zz")
 local builtin = require('telescope.builtin')
 local themes = require('telescope.themes')
 
+-- vim.keymap.set('n', '<leader>pf', function()
+--   builtin.find_files(themes.get_dropdown({ winblend = 10 }))
+-- end, { desc = 'Telescope find files' })
+--
+-- vim.keymap.set('n', '<leader>ps', function()
+--   builtin.grep_string(themes.get_dropdown({
+--     search = vim.fn.input("Grep > "),
+--     winblend = 10
+--   }))
+-- end)
+--
+-- vim.keymap.set('n', '<C-p>', function()
+--   builtin.git_files(themes.get_dropdown({ winblend = 10 }))
+-- end, { desc = 'Telescope find git files' })
+--
 vim.keymap.set('n', '<leader>pf', function()
-  builtin.find_files(themes.get_dropdown({ winblend = 10 }))
+  builtin.find_files()
 end, { desc = 'Telescope find files' })
 
 vim.keymap.set('n', '<leader>ps', function()
-  builtin.grep_string(themes.get_dropdown({
+  builtin.grep_string({
     search = vim.fn.input("Grep > "),
-    winblend = 10
-  }))
+  })
 end)
 
 vim.keymap.set('n', '<C-p>', function()
-  builtin.git_files(themes.get_dropdown({ winblend = 10 }))
+  builtin.git_files()
 end, { desc = 'Telescope find git files' })
 
 vim.keymap.set({ "n", "v" }, "<leader>y", [["+y]])
