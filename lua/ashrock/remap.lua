@@ -37,10 +37,14 @@ vim.keymap.set('n', '<leader>pf', function()
   builtin.find_files()
 end, { desc = 'Telescope find files' })
 
+-- vim.keymap.set('n', '<leader>ps', function()
+--   builtin.grep_string({
+--     search = vim.fn.input("Grep > "),
+--   })
+-- end)
+
 vim.keymap.set('n', '<leader>ps', function()
-  builtin.grep_string({
-    search = vim.fn.input("Grep > "),
-  })
+  builtin.live_grep()
 end)
 
 vim.keymap.set('n', '<C-p>', function()
