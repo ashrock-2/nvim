@@ -23,3 +23,22 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.opt_local.number = true
   end,
 })
+
+vim.api.nvim_create_autocmd("BufNewFile", {
+  pattern = "*.md",
+  callback = function()
+    local file_path = vim.fn.expand('%:p')
+    if string.match(file_path, "/texts/") then
+      local current_time = os.date("%Y-%m-%d %H:%M")
+      local template = {
+        "",
+        "",
+        "---",
+        "created: " .. current_time,
+        "---",
+      }
+      vim.api.nvim_buf_set_lines(0, 0, 0, false, template)
+      vim.api.nvim_win_set_cursor(0, { 1, 0 })
+    end
+  end
+})
