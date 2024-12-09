@@ -15,4 +15,5 @@ return {
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
   },
+  "junegunn/goyo.vim"
 }
