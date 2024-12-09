@@ -10,6 +10,21 @@ vim.keymap.set('n', '<leader>pp', function()
   vim.cmd.Prettier()
 end)
 
+function OpenRandomFileInDir()
+  local output = vim.fn.system('ls -p | grep -v /')
+  local files = vim.split(output, '\n')
+  if #files == 0 then
+    print("No files in directory.")
+    return
+  end
+  math.randomseed(os.time())
+  local idx = math.random(#files)
+  local file = files[idx]
+  vim.cmd('edit ' .. file)
+end
+
+vim.keymap.set('n', '<leader>r', OpenRandomFileInDir)
+
 -- vim.keymap.set("n", "<leader>j", "<cmd>cnext<CR>zz")
 -- vim.keymap.set("n", "<leader>k", "<cmd>cprev<CR>zz")
 vim.keymap.set("n", "[q", "<cmd>cprev<CR>zz")
