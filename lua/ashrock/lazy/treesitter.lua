@@ -16,6 +16,7 @@ return {
       highlight = {
         enable = true,
         disable = { "astro" },
+        additional_vim_regex_highlighting = { 'markdown' },
       },
     })
   end
