@@ -81,7 +81,7 @@ vim.keymap.set("n", "<C-e>", function() harpoon.ui:toggle_quick_menu(harpoon:lis
 
 -- Harpoon file selection
 for i = 1, 8 do
-  vim.keymap.set("n", string.format("<C-%d>", i), function() harpoon:list():select(i) end)
+  vim.keymap.set("n", string.format("<leader>%d", i), function() harpoon:list():select(i) end)
 end
 
 -- Harpoon navigation
