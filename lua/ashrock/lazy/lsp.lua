@@ -59,6 +59,7 @@ return {
       local cmp = require('cmp')
       local cmp_select = { behavior = cmp.SelectBehavior.Select }
 
+      -- 기본 자동완성 설정
       cmp.setup({
         mapping = cmp.mapping.preset.insert({
           ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
@@ -72,6 +73,24 @@ return {
         }, {
           { name = 'buffer' },
         })
+      })
+
+      -- 명령줄 모드 (':') 자동완성 설정
+      cmp.setup.cmdline(':', {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = cmp.config.sources({
+          { name = 'path' }
+        }, {
+          { name = 'cmdline' },
+        })
+      })
+
+      -- 검색 모드 ('/' or '?') 자동완성 설정
+      cmp.setup.cmdline({ '/', '?' }, {
+        mapping = cmp.mapping.preset.cmdline(),
+        sources = {
+          { name = 'buffer' }
+        }
       })
     end
 
