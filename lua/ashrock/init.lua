@@ -2,6 +2,7 @@ require("ashrock.set")
 require("ashrock.lazy_init")
 require("ashrock.remap")
 require("ashrock.autosync")
+require("ashrock.completion")
 
 local autocmd = vim.api.nvim_create_autocmd
 autocmd('LspAttach', {
