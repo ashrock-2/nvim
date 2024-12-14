@@ -66,6 +66,7 @@ local function get_all_objects()
   return objects_cache.data
 end
 
+-- 자동완성 소스 설정
 local source = {}
 
 source.new = function()
@@ -80,7 +81,6 @@ source.complete = function(self, params, callback)
   local line = params.context.cursor_before_line
   local items = {}
   
-  -- topics: 또는 objects: 라인인지 확인
   local is_topics = line:match('topics:')
   local is_objects = line:match('objects:')
   
@@ -109,4 +109,8 @@ source.complete = function(self, params, callback)
   callback({ items = items })
 end
 
-require('cmp').register_source('topics', source.new())
+return {
+  get_all_topics = get_all_topics,
+  get_all_objects = get_all_objects,
+  completion_source = source,
+}
