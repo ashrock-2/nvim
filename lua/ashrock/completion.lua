@@ -3,9 +3,13 @@ local topics_cache = {
   last_update = 0
 }
 
+local objects_cache = {
+  data = {},
+  last_update = 0
+}
+
 local function get_all_topics()
   local current_time = os.time()
-  -- 5분마다 캐시 갱신
   if current_time - topics_cache.last_update > 300 then
     local topics = {}
     local files = vim.fn.glob('**/*.md', false, true)
@@ -31,6 +35,35 @@ local function get_all_topics()
   end
 
   return topics_cache.data
+end
+
+local function get_all_objects()
+  local current_time = os.time()
+  if current_time - objects_cache.last_update > 300 then
+    local objects = {}
+    local files = vim.fn.glob('**/*.md', false, true)
+
+    for _, file in ipairs(files) do
+      local content = vim.fn.readfile(file)
+      local in_frontmatter = false
+
+      for _, line in ipairs(content) do
+        if line == '---' then
+          in_frontmatter = not in_frontmatter
+        elseif in_frontmatter and line:match('^objects:') then
+          local object_list = line:gsub('objects:', ''):gsub('%s+', ''):gsub(',', '\n')
+          for object in object_list:gmatch('[^\n]+') do
+            objects[object] = true
+          end
+        end
+      end
+    end
+
+    objects_cache.data = vim.tbl_keys(objects)
+    objects_cache.last_update = current_time
+  end
+
+  return objects_cache.data
 end
 
 vim.api.nvim_create_autocmd('FileType', {
@@ -72,14 +105,33 @@ source.get_trigger_characters = function()
 end
 
 source.complete = function(self, params, callback)
-  local topics = get_all_topics()
+  local line = params.context.cursor_before_line
   local items = {}
   
-  for _, topic in ipairs(topics) do
-      table.insert(items, {
-        label = topic,
-        kind = vim.lsp.protocol.CompletionItemKind.Text
-      })
+  -- topics: 또는 objects: 라인인지 확인
+  local is_topics = line:match('topics:')
+  local is_objects = line:match('objects:')
+  
+  if is_topics then
+    local topics = get_all_topics()
+    for _, topic in ipairs(topics) do
+      if vim.startswith(topic:lower(), line:match("[^,%s]*$"):lower()) then
+        table.insert(items, {
+          label = topic,
+          kind = vim.lsp.protocol.CompletionItemKind.Text
+        })
+      end
+    end
+  elseif is_objects then
+    local objects = get_all_objects()
+    for _, object in ipairs(objects) do
+      if vim.startswith(object:lower(), line:match("[^,%s]*$"):lower()) then
+        table.insert(items, {
+          label = object,
+          kind = vim.lsp.protocol.CompletionItemKind.Text
+        })
+      end
+    end
   end
   
   callback({ items = items })
