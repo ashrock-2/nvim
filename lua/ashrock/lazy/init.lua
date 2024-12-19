@@ -14,5 +14,6 @@ return {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
-  }
+  },
+  { 'glacambre/firenvim',     build = ":call firenvim#install(0)" }
 }
