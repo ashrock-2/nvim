@@ -17,7 +17,7 @@ vim.opt.ruler = false
 vim.opt.cursorline = true
 
 vim.api.nvim_create_autocmd("FileType", {
-  pattern = "netrw",
+  pattern = "netrw|oil",
   callback = function()
     vim.opt_local.relativenumber = true
     vim.opt_local.number = true
@@ -50,7 +50,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
     if string.match(file_path, "/texts/") then
       local current_time = os.date("%Y-%m-%d %H:%M")
       local lines = vim.api.nvim_buf_get_lines(0, 0, -1, false)
-      
+
       -- created 라인의 인덱스를 찾습니다
       local created_index = -1
       for i, line in ipairs(lines) do
@@ -70,7 +70,7 @@ vim.api.nvim_create_autocmd("BufWritePre", {
           -- updated가 없다면 새로 추가
           table.insert(lines, created_index + 1, "updated: " .. current_time)
         end
-        
+
         -- 변경된 내용을 버퍼에 적용
         vim.api.nvim_buf_set_lines(0, 0, -1, false, lines)
       end

@@ -15,5 +15,18 @@ return {
     branch = "harpoon2",
     dependencies = { "nvim-lua/plenary.nvim" }
   },
-  { 'glacambre/firenvim',     build = ":call firenvim#install(0)" }
+  { 'glacambre/firenvim',     build = ":call firenvim#install(0)" },
+  {
+    'stevearc/oil.nvim',
+    ---@module 'oil'
+    ---@type oil.SetupOpts
+    opts = {
+      keymaps = {
+        ["<C-p>"] = false,
+      }
+    },
+    -- Optional dependencies
+    dependencies = { { "echasnovski/mini.icons", opts = {} } },
+    -- dependencies = { "nvim-tree/nvim-web-devicons" }, -- use if prefer nvim-web-devicons
+  }
 }
