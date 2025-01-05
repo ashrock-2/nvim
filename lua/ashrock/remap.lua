@@ -1,5 +1,4 @@
 -- Basic editor commands
-vim.keymap.set("n", "-", "<CMD>Oil<CR>")
 vim.cmd("command W w")
 vim.cmd("command Q q")
 
@@ -87,3 +86,13 @@ end
 -- Harpoon navigation
 vim.keymap.set("n", "<C-S-P>", function() harpoon:list():prev() end)
 vim.keymap.set("n", "<C-S-N>", function() harpoon:list():next() end)
+
+-- Oil Project View
+vim.keymap.set({ "n" }, "-", "<CMD>Oil<CR>", { noremap = true, silent = true, buffer = false })
+-- override vimwiki keybinding
+vim.api.nvim_create_autocmd("FileType", {
+  pattern = "vimwiki",
+  callback = function()
+    vim.keymap.set("n", "-", "<CMD>Oil<CR>", { noremap = true, silent = true, buffer = true })
+  end
+})
