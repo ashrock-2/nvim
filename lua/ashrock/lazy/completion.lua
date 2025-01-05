@@ -9,7 +9,7 @@ return {
   config = function()
     local cmp = require('cmp')
     local cmp_select = { behavior = cmp.SelectBehavior.Select }
-    
+
     -- frontmatter 소스 등록
     local frontmatter = require('ashrock.md_frontmatter')
     cmp.register_source('md_frontmatter', frontmatter.completion_source.new())
@@ -19,7 +19,6 @@ return {
       mapping = cmp.mapping.preset.insert({
         ['<C-p>'] = cmp.mapping.select_prev_item(cmp_select),
         ['<C-n>'] = cmp.mapping.select_next_item(cmp_select),
-        ['<CR>'] = cmp.mapping.confirm({ select = true }),
         ["<C-Space>"] = cmp.mapping.complete(),
       }),
       sources = cmp.config.sources({
@@ -48,4 +47,5 @@ return {
       }
     })
   end
-} 
+}
+
