@@ -1,5 +1,5 @@
 -- Basic editor commands
-vim.keymap.set("n", "<leader>pv", "<CMD>Oil<CR>")
+vim.keymap.set("n", "-", "<CMD>Oil<CR>")
 vim.cmd("command W w")
 vim.cmd("command Q q")
 
@@ -21,7 +21,7 @@ vim.keymap.set("n", "<leader>gs", function()
 end)
 
 -- Code formatting
-vim.keymap.set('n', '<leader>pp', function()
+vim.keymap.set('n', '<leader>pr', function()
   vim.cmd.EslintFixAll()
   vim.cmd.Prettier()
 end)

@@ -23,7 +23,8 @@ return {
     opts = {
       keymaps = {
         ["<C-p>"] = false,
-      }
+      },
+      watch_for_changes = true
     },
     -- Optional dependencies
     dependencies = { { "echasnovski/mini.icons", opts = {} } },
