@@ -9,24 +9,40 @@ local function git_sync()
   end
 
   -- 변경사항 확인
-  local status = vim.fn.system("git status --porcelain")
-  if status == "" then
-    return  -- 변경사항이 없으면 종료
-  end
+  vim.fn.jobstart("git status --porcelain", {
+    on_stdout = function(_, data)
+      if #data == 1 and data[1] == "" then
+        return  -- 변경사항이 없으면 종료
+      end
 
-  local commands = {
-    "git add .",
-    'git commit -m "Auto sync: ' .. os.date("%Y-%m-%d %H:%M:%S") .. '"',
-    "git push origin HEAD"
-  }
+      -- Git 명령어들을 순차적으로 실행
+      local function run_commands(commands, index)
+        if index > #commands then return end
+        
+        vim.fn.jobstart(commands[index], {
+          on_exit = function(_, code)
+            if code == 0 then
+              if index < #commands then
+                run_commands(commands, index + 1)
+              end
+            else
+              vim.schedule(function()
+                vim.notify("Git sync failed at: " .. commands[index], vim.log.levels.ERROR)
+              end)
+            end
+          end
+        })
+      end
 
-  for _, cmd in ipairs(commands) do
-    local result = vim.fn.system(cmd)
-    if vim.v.shell_error ~= 0 then
-      vim.notify("Git sync failed: " .. result, vim.log.levels.ERROR)
-      return
+      local commands = {
+        "git add .",
+        'git commit -m "Auto sync: ' .. os.date("%Y-%m-%d %H:%M:%S") .. '"',
+        "git push origin HEAD"
+      }
+
+      run_commands(commands, 1)
     end
-  end
+  })
 end
 
 local timer = vim.loop.new_timer()
