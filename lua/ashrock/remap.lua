@@ -21,7 +21,15 @@ end)
 
 -- Code formatting
 vim.keymap.set('n', '<leader>pr', function()
-  vim.cmd.EslintFixAll()
+  -- ESLint가 사용 가능한지 확인
+  local eslint_available = vim.fn.executable('eslint') == 1 or 
+                          #vim.lsp.get_active_clients({ name = "eslint" }) > 0 or
+                          #vim.lsp.get_active_clients({ name = "eslintls" }) > 0
+  
+  if eslint_available then
+    vim.cmd.EslintFixAll()
+  end
+  
   vim.cmd.Prettier()
 end)
 
