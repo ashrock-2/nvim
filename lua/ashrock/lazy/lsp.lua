@@ -9,7 +9,7 @@ return {
     "williamboman/mason-lspconfig.nvim",
     config = function()
       require("mason-lspconfig").setup({
-        ensure_installed = {"ts_ls" },
+        ensure_installed = { "ts_ls" },
         automatic_installation = true
       })
     end
@@ -28,7 +28,20 @@ return {
             capabilities = capabilities
           })
         end,
-
+        ["ts_ls"] = function()
+          require("lspconfig").ts_ls.setup({
+            root_dir = require("lspconfig").util.root_pattern({ "package.json", "tsconfig.json" }),
+            single_file_support = false,
+            settings = {},
+          })
+        end,
+        ["denols"] = function()
+          require("lspconfig").denols.setup({
+            root_dir = require("lspconfig").util.root_pattern({ "deno.json", "deno.jsonc" }),
+            single_file_support = false,
+            settings = {},
+          })
+        end,
         ["lua_ls"] = function()
           require("lspconfig").lua_ls.setup({
             capabilities = capabilities,
