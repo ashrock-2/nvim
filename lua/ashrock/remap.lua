@@ -104,3 +104,5 @@ vim.api.nvim_create_autocmd("FileType", {
     vim.keymap.set("n", "-", "<CMD>Oil<CR>", { noremap = true, silent = true, buffer = true })
   end
 })
+
+vim.keymap.set("n", "<leader>.", vim.lsp.buf.code_action, { desc = "Quick fix / Code actions" })
