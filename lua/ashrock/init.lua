@@ -20,12 +20,21 @@ autocmd('LspAttach', {
     vim.keymap.set("n", "[d", function() vim.diagnostic.goto_next() end, opts)
     vim.keymap.set("n", "]d", function() vim.diagnostic.goto_prev() end, opts)
     if vim.lsp.get_client_by_id(e.data.client_id).server_capabilities.documentFormattingProvider then
-      vim.api.nvim_create_autocmd("BufWritePre", {
-        buffer = e.buf,
-        callback = function()
-          vim.lsp.buf.format { async = false, id = e.data.client_id }
-        end,
-      })
+      -- ESLint/Prettier 가용성 확인
+      local has_eslint = vim.fn.executable('eslint') == 1 or
+          #vim.lsp.get_active_clients({ name = "eslint" }) > 0 or
+          #vim.lsp.get_active_clients({ name = "eslintls" }) > 0
+      local has_prettier = vim.fn.executable('prettier') == 1
+
+      -- ESLint나 Prettier가 없는 경우에만 LSP 포맷팅 활성화
+      if not (has_eslint or has_prettier) then
+        vim.api.nvim_create_autocmd("BufWritePre", {
+          buffer = e.buf,
+          callback = function()
+            vim.lsp.buf.format { async = false, id = e.data.client_id }
+          end,
+        })
+      end
     end
     -- vim.api.nvim_create_autocmd("BufWritePre", {
     --   pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },

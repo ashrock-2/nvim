@@ -19,8 +19,8 @@ vim.keymap.set("n", "<leader>gs", function()
   vim.api.nvim_feedkeys(vim.api.nvim_replace_termcodes("<C-w>o", true, false, true), "n", true)
 end)
 
--- Code formatting
-vim.keymap.set('n', '<leader>pr', function()
+-- Code formatting function
+local function format_code()
   -- ESLint가 사용 가능한지 확인
   local eslint_available = vim.fn.executable('eslint') == 1 or 
                           #vim.lsp.get_active_clients({ name = "eslint" }) > 0 or
@@ -31,7 +31,16 @@ vim.keymap.set('n', '<leader>pr', function()
   end
   
   vim.cmd.Prettier()
-end)
+end
+
+-- Manual formatting shortcut
+vim.keymap.set('n', '<leader>pr', format_code)
+
+-- Auto format on save for JS/TS files
+vim.api.nvim_create_autocmd("BufWritePre", {
+  pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
+  callback = format_code,
+})
 
 -- Diagnostic
 vim.keymap.set("n", "<leader>e", function()
