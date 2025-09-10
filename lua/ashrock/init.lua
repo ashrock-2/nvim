@@ -8,7 +8,24 @@ local autocmd = vim.api.nvim_create_autocmd
 autocmd('LspAttach', {
   callback = function(e)
     local opts = { buffer = e.buf }
-    vim.keymap.set("n", "gd", function() vim.lsp.buf.definition() end, opts)
+    vim.keymap.set("n", "gd", function()
+      local current_pos = vim.api.nvim_win_get_cursor(0)
+      local current_buf = vim.api.nvim_get_current_buf()
+      
+      vim.lsp.buf.definition()
+      
+      vim.defer_fn(function()
+        local new_pos = vim.api.nvim_win_get_cursor(0)
+        local new_buf = vim.api.nvim_get_current_buf()
+        
+        -- 같은 위치라면 (이미 definition에 있음) references 표시
+        if current_buf == new_buf and 
+           current_pos[1] == new_pos[1] and 
+           current_pos[2] == new_pos[2] then
+          vim.lsp.buf.references()
+        end
+      end, 100)
+    end, opts)
     vim.keymap.set("n", "K", function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set("n", "gh", function() vim.lsp.buf.hover() end, opts)
     vim.keymap.set("n", "<leader>vws", function() vim.lsp.buf.workspace_symbol() end, opts)
