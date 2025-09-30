@@ -4,12 +4,8 @@ return {
   'prettier/vim-prettier',
   { 'windwp/nvim-ts-autotag', config = true },
   "theprimeagen/vim-be-good",
-  {
-    "yorumicolors/yorumi.nvim",
-    config = function()
-      vim.cmd("colorscheme yorumi")
-    end
-  },
+  "sainnhe/gruvbox-material",
+  "yorumicolors/yorumi.nvim",
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",

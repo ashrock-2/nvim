@@ -4,6 +4,8 @@ require("ashrock.remap")
 require("ashrock.autosync")
 require("ashrock.bufonly")
 
+vim.cmd("colorscheme gruvbox-material")
+
 local autocmd = vim.api.nvim_create_autocmd
 autocmd('LspAttach', {
   callback = function(e)
