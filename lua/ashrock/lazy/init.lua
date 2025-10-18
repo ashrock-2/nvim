@@ -6,6 +6,9 @@ return {
   "theprimeagen/vim-be-good",
   "sainnhe/gruvbox-material",
   "yorumicolors/yorumi.nvim",
+  "rebelot/kanagawa.nvim",
+  "folke/tokyonight.nvim",
+  "scottmckendry/cyberdream.nvim",
   {
     "ThePrimeagen/harpoon",
     branch = "harpoon2",

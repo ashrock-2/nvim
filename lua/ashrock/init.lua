@@ -4,7 +4,7 @@ require("ashrock.remap")
 require("ashrock.autosync")
 require("ashrock.bufonly")
 
-vim.cmd("colorscheme gruvbox-material")
+vim.cmd("colorscheme tokyonight")
 
 local autocmd = vim.api.nvim_create_autocmd
 autocmd('LspAttach', {
