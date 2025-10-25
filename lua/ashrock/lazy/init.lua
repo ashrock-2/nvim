@@ -1,6 +1,7 @@
 return {
   {
     "eoh-bse/minintro.nvim",
+    opts = { color = '#4169E1'},
     config = true,
     lazy = false
   },
