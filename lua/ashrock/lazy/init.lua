@@ -1,4 +1,9 @@
 return {
+  {
+    "eoh-bse/minintro.nvim",
+    config = true,
+    lazy = false
+  },
   "nvim-lua/plenary.nvim",
   'tpope/vim-fugitive',
   'prettier/vim-prettier',
