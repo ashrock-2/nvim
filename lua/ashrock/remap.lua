@@ -41,12 +41,6 @@ end
 -- Manual formatting shortcut
 vim.keymap.set('n', '<leader>pr', format_code)
 
--- Auto format on save for JS/TS files
-vim.api.nvim_create_autocmd("BufWritePre", {
-  pattern = { "*.js", "*.jsx", "*.ts", "*.tsx" },
-  callback = format_code,
-})
-
 -- Diagnostic
 vim.keymap.set("n", "<leader>e", function()
   vim.diagnostic.setqflist()

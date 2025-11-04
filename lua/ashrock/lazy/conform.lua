@@ -20,5 +20,27 @@ return {
         end,
       },
     },
+    -- 저장 시 자동 포매팅 (conform 권장 방식)
+    format_on_save = function(bufnr)
+      -- JS/TS 파일만 자동 포매팅
+      local ft = vim.bo[bufnr].filetype
+      if not vim.tbl_contains({ "javascript", "javascriptreact", "typescript", "typescriptreact" }, ft) then
+        return
+      end
+
+      -- ESLint가 사용 가능한지 확인하고 먼저 실행
+      local eslint_available = vim.fn.executable('eslint') == 1 or
+                              #vim.lsp.get_active_clients({ name = "eslint" }) > 0 or
+                              #vim.lsp.get_active_clients({ name = "eslintls" }) > 0
+
+      if eslint_available then
+        vim.cmd.EslintFixAll()
+      end
+
+      return {
+        timeout_ms = 500,
+        lsp_format = "fallback",
+      }
+    end,
   },
 }
