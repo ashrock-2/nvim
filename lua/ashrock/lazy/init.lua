@@ -5,9 +5,16 @@ return {
     config = true,
     lazy = false
   },
+  "andreasvc/vim-256noir",
   "nvim-lua/plenary.nvim",
   'tpope/vim-fugitive',
   'prettier/vim-prettier',
+  {
+  "zenbones-theme/zenbones.nvim",
+  dependencies = "rktjmp/lush.nvim",
+    lazy = false,
+    priority = 1000,
+  },
   { 'windwp/nvim-ts-autotag', config = true },
   "theprimeagen/vim-be-good",
   "sainnhe/gruvbox-material",
