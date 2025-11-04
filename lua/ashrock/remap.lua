@@ -22,15 +22,20 @@ end)
 -- Code formatting function
 local function format_code()
   -- ESLint가 사용 가능한지 확인
-  local eslint_available = vim.fn.executable('eslint') == 1 or 
+  local eslint_available = vim.fn.executable('eslint') == 1 or
                           #vim.lsp.get_active_clients({ name = "eslint" }) > 0 or
                           #vim.lsp.get_active_clients({ name = "eslintls" }) > 0
-  
+
   if eslint_available then
     vim.cmd.EslintFixAll()
   end
-  
-  vim.cmd.Prettier()
+
+  -- conform.nvim을 사용하여 포매팅 (Biome 또는 Prettier)
+  require("conform").format({
+    lsp_fallback = true,
+    async = true,
+    timeout_ms = 500,
+  })
 end
 
 -- Manual formatting shortcut
